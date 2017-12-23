@@ -10,7 +10,8 @@ import (
 	"io/ioutil"
 	"compress/gzip"
 	"encoding/binary"
-	"code.google.com/p/snappy-go/snappy"
+//	"code.google.com/p/snappy-go/snappy"
+	"github.com/golang/snappy"
 )
 
 
@@ -131,7 +132,7 @@ func (db *BlockDB) BlockAdd(height uint32, bl *Block) (e error) {
 	}
 
 	flagz[0] |= BLOCK_COMPRSD|BLOCK_SNAPPED // gzip compression is deprecated
-	cbts, _ := snappy.Encode(nil, bl.Raw)
+	cbts/*, _*/ := snappy.Encode(nil, bl.Raw)
 
 	blksize := uint32(len(cbts))
 
